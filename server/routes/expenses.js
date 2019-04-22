@@ -6,7 +6,8 @@ const jwt = require('jsonwebtoken');
 const keys = require('../config/mongodb');
 const passport = require('passport');
 
-const Expense = require('../models/Expense')
+const Expense = require('../models/Expense');
+const User = require('../models/User');
 
 const validateExpenseInput = require('../validators/expense');
 
@@ -25,51 +26,50 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
     if(!isValid){
         return res.status(400).json(errors);
     }
+    
+
+    if(!req.body.expenseDate){
+       date = Date.now();
+    }else{
+        date= req.body.expenseDate;
+    }
 
     const newExpense = new Expense({
         description: req.body.description,
         amount : req.body.amount,
-        // expenseDate: req.body.expenseDate ? req.body.expenseDate: ''
-        expenseDate: req.body.expenseDate, 
-        userName: req.body.userName
+        //expenseDate: req.body.expenseDate ? req.body.expenseDate: {expenseDate: new Date()},
+        expenseDate: date, 
+        user: req.body.user
     });
 
-    newExpense.save().then(expense => res.json(expense)).catch(error => console.log(error));
+    newExpense.save().then(expense => res.json(expense)).catch(error => res.status(500).json(error));
 
 
 }); 
 
-// @route   POST api/expenses/getDateRange
-// @desc    query date range
+
+// @route   POST api/expenses/getUserExpenses
+// @desc    query expenses by user id and date range
 // @access  Public
-router.post('/getDateRange', passport.authenticate('jwt', { session: false }), (req, res)=>{
-    let errors ={}
+router.post('/getUserExpenses', passport.authenticate('jwt', { session: false }), (req, res)=>{
 
-    //do a validaation check from should not be bigger than to. 
+        User.findById(req.body.id).then(user =>{
+            Expense.find({
+                expenseDate: {
+                    $gte: req.body.from,
+                    $lte: req.body.to
+                }
+            }).then(expense =>{
+                if (!expense){
+                    res.status(404).json(errors);
+                }
+        
+                res.json(expense);
+            })
 
-    //find expense from specified range
-
-  try {
-    Expense.find({
-        expenseDate: {
-            $gte: req.body.from,
-            $lte: req.body.to
-        }
-    }).then(expense =>{
-        if (!expense){
-            res.status(404).json(errors);
-        }
-
-        res.json(expense);
-    })
-      
-  } catch (error) {
-      res.json(error)
-  }
-
- 
-
+        }).catch(err =>res.status(500).json(err))
 
 });
+
 
 module.exports = router;

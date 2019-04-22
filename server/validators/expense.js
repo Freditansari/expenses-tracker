@@ -6,7 +6,7 @@ module.exports = function validateExpenseInput(data){
 
     data.description = !isEmpty(data.description)? data.description : '';
     data.amount = ! isEmpty(data.amount)? data.amount: '';
-    data.userName = ! isEmpty(data.userName)? data.userName: '';
+    // data.user = ! isEmpty(data.user)? data.user: '';
 
     if(Validator.isEmpty(data.description)){
         errors.description = 'description is required';
@@ -16,10 +16,10 @@ module.exports = function validateExpenseInput(data){
         errors.amount = 'amount is required'; 
         
     }
-    if(Validator.isEmpty(data.userName)){
-        errors.userName = 'user name is required'; 
+    // if(Validator.isEmpty(data.userName)){
+    //     errors.userName = 'user name is required'; 
         
-    }
+    // }
 
     return {
         errors,
