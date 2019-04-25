@@ -21,9 +21,9 @@ class Header extends Component {
         
             <NavDropdown.Item href="/login">Login</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">Logout</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <NavDropdown.Item href="/register">Register</NavDropdown.Item>
             <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+        <NavDropdown.Item href="/expense">Separated link</NavDropdown.Item>
        
       </NavDropdown>
     </Nav>

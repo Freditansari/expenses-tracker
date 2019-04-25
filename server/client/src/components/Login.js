@@ -13,7 +13,7 @@ class Login extends Component {
                 <Col>{' '}</Col>
                 <Col>
 
-                <Card body style={{ width: '25rem',marginTop:'2.5rem' }}>
+                <Card body style={{ width: '20rem',marginTop:'2.5rem' }}>
                 <Card.Title>Please Enter Your Credentials</Card.Title>
 
                 <Container>

@@ -6,9 +6,6 @@ const passport = require('passport');
 
 
 const app= express();
-const db = require('./config/mongodb').mongoURI;
-
-
 
 
 
@@ -16,8 +13,10 @@ const db = require('./config/mongodb').mongoURI;
 const users = require('./routes/users');
 const expenses = require('./routes/expenses')
 
+
+const db = require('./config/mongodb').mongoURI;
 app.use(bodyParser.urlencoded({extended:false})); 
-app.unsubscribe(bodyParser.json());
+app.use(bodyParser.json());
 
 mongoose.connect(db).then(()=>console.log('Monggo db connecteed')).catch(err=>console.log(err));
 
@@ -26,11 +25,13 @@ app.get('/', (req, res)=>res.send('hello world'));
 app.use('/api/users', users);
 app.use('/api/expenses', expenses );
 
+// Passport Config
+require('./config/passport')(passport);
+
 // Passport middleware
 app.use(passport.initialize());
 
-// Passport Config
-require('./config/passport')(passport);
+
 
 const port = process.env.PORT || 5000;
 
