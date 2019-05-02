@@ -6,6 +6,7 @@ import {Card, Container} from 'react-bootstrap';
 import {startAddExpense} from '../redux/actions/expenseActions'
 
  class AddExpense extends Component {
+     //todo add a back button at the bottom
 
     constructor(){
         super();

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router , Route, Switch} from 'react-router-dom';
 import { Container} from 'react-bootstrap';
 import {Provider} from 'react-redux';
 import jwt_decode from 'jwt-decode';
@@ -18,6 +18,10 @@ import store from './store';
 import { setCurrentUser, logoutUser } from './redux/actions/authActions';
 import AddExpense from './components/AddExpense';
 import placeholder from './components/placeholder';
+
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
 
 
 
@@ -55,18 +59,22 @@ class App extends Component {
          
         
         
+        
           <Router>
-            <Header />  
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/expense" component={ExpenseListItem} />
-            <Route exact path="/addexpense" component={AddExpense} />
-            <Route exact path="/placeholder" component={placeholder} />
+            <div>
+                <Header />  
             
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/register" component={Register} />
+                {/* <Route exact path="/expense" component={ExpenseListItem} /> */}
+                <Route exact path="/addexpense" component={AddExpense} />
+                <Route exact path="/placeholder" component={placeholder} />
+            </div>
+            </Router>
 
-          </Router>
+          
      
           </Provider>  
        
