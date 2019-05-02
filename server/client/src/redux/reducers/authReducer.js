@@ -1,9 +1,21 @@
-const authReducerDefaultState =[];
+import isEmpty from "../../validation/isEmpty";
+
+const authReducerDefaultState =[
+    {
+        isAuthenticated: false,
+        user: {}
+    }
+];
 
 export default(state = authReducerDefaultState, action)=>{
     switch(action.type){
-        // case 'ADD_USER':
-        //     return [state, action.user];
+  
+        case 'SET_CURRENT_USER':
+            return{
+                ...state,
+                isAuthenticated: !isEmpty(action.payload), 
+                user:action.payload
+            }
         default: 
             return state;
     }

@@ -37,12 +37,15 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
     const newExpense = new Expense({
         description: req.body.description,
         amount : req.body.amount,
-        //expenseDate: req.body.expenseDate ? req.body.expenseDate: {expenseDate: new Date()},
-        expenseDate: date, 
-        user: req.body.user
+        note: req.body.note,
+        expenseDate: req.body.createdAt, 
+        // user: req.body.user
+        user: req.user.id
     });
 
-    newExpense.save().then(expense => res.json(expense)).catch(error => res.status(500).json(error));
+   
+
+    newExpense.save().then(expense => res.json(expense)).catch(error => res.status(500).json(errors));
 
 
 }); 

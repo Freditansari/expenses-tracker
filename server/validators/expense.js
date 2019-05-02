@@ -2,6 +2,7 @@ const Validator = require('validator');
 const isEmpty = require('./is-empty');
 
 module.exports = function validateExpenseInput(data){
+
     let errors={};
 
     data.description = !isEmpty(data.description)? data.description : '';
@@ -12,14 +13,11 @@ module.exports = function validateExpenseInput(data){
         errors.description = 'description is required';
 
     }
-    if(Validator.isEmpty(data.amount)){
+    if(isNaN(data.amount)){
         errors.amount = 'amount is required'; 
         
     }
-    // if(Validator.isEmpty(data.userName)){
-    //     errors.userName = 'user name is required'; 
-        
-    // }
+  
 
     return {
         errors,
