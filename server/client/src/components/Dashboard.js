@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
-import {Jumbotron, Button, Container, Row, Col, InputGroup, FormControl, DropdownButton, Dropdown} from 'react-bootstrap';
+
 import ExpenseFilters from './ExpenseFilters';
 import ExpenseListItem from './ExpenseListItem';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'; 
+
+import JumbotronHeader from './JumbotronHeader';
+import getFilteredExpenses from './getFilteredExpenses'
+import {connect} from 'react-redux';
+import {getAllExpenses} from '../redux/actions/expenseActions'
 
 
 
 class Dashboard extends Component {
 
 
+  
+
+
   render() {
     return (
       <div>
-        <Jumbotron>
-          <h1 className="text-white">Viewing 4 expense(s) with total of: $ 4,000 </h1>
-          {/* <Button to="/addexpense">Add Expense</Button> */}
-          <Link className="btn btn-primary " to="/addExpense"> Add Expense</Link>
-        </Jumbotron>
-        <Container>
+        <JumbotronHeader potato = {this.props.expenses} />
+
+        
           <ExpenseFilters />
       
-        </Container>
+        
         <ExpenseListItem />
           
         
@@ -28,5 +33,11 @@ class Dashboard extends Component {
     )
   }
 }
+const mapStateToProps = (state) =>({
+  filters: state.filters,
+  errors: state.error,
+  expenses: getFilteredExpenses(state.expenses, state.filters)
 
-export default Dashboard
+})
+export default connect(mapStateToProps, {getAllExpenses})(Dashboard);
+

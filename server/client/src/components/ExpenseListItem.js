@@ -7,7 +7,6 @@ import numeral from 'numeral';
 import getFilteredExpenses from './getFilteredExpenses'
 
  class ExpenseListItem extends Component {
-
   componentDidMount(){
     const expenseFilters ={
       from: this.props.filters.from,
@@ -18,6 +17,8 @@ import getFilteredExpenses from './getFilteredExpenses'
    
 
   }
+
+ 
   render() {
     return (
       <div className="row d-flex justify-content-center mt-3">
@@ -31,6 +32,9 @@ import getFilteredExpenses from './getFilteredExpenses'
               (
                   <div>
                     <span>No expenses available</span>
+                    <div class="spinner-border text-primary" role="status">
+                      <p><span class="sr-only">Loading...</span></p>
+                    </div>
                   </div>
               ):
               (
