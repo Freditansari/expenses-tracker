@@ -3,10 +3,12 @@ const expensesReducerDefaultState=[];
 export default(state = expensesReducerDefaultState, action)=>{
     switch(action.type){
         case 'ADD_EXPENSE':
-            console.log(action.type)
             return [...state,
                  action.expense
                 ];
+        case 'SET_EXPENSES': 
+            return action.payload;
+                
         // case 'REMOVE_EXPENSE':
         //     return state.filter(({id})=> id !=- action.id);
         

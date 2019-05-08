@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBIcon, MDBCardTitle, MDBCardText} from 'mdbreact';
 import moment from 'moment';
-import {Container, Row, Col, Card, Form, Button} from 'react-bootstrap';
 import {SingleDatePicker} from 'react-dates';
 import {connect} from 'react-redux'
-
 
 class ExpenseForm extends Component {
     constructor(props) {
@@ -57,75 +56,113 @@ class ExpenseForm extends Component {
             amount: parseFloat(this.state.amount, 10) * 100,
             createdAt: this.state.createdAt.valueOf(),
             note: this.state.note
-            // user: this.props.auth.user.id.toString()
+          
           });
         }
       };
   render() {
     return (
-      <div>
-            <Container>
-              {/* <h1>this is from expense form</h1> */}
+        <div>
+               <MDBContainer>
 
-              <Row>
-                  <Col>{' '}</Col>
-                  <Col>
-
-                  <Card body style={{ width: '20rem',marginTop:'2.5rem' }}>
+       
+ 
+       <form onSubmit={this.onSubmit}>
+        <MDBCol>
+            <MDBCard>
                
-                  
+                <MDBCardBody>
+               
+                <MDBCardText>
+                
 
-                  <Container>
-                          <Form onSubmit={this.onSubmit}>
-                          <Container >
-                          <Form.Group controlId="formBasicDescription">
-                      
-                              <Form.Control name="description" type="text" value={this.state.description} onChange={this.onChange} placeholder="Your expense description" />
-                       
-                          </Form.Group>
-                          <Form.Group controlId="formBasicAmount">
-                              
-                              <Form.Control name="amount" type="text" value={this.state.amount} onChange={this.onAmountChange} placeholder="Your expense amount" />
-                      
-                          </Form.Group>
-            
-                          <SingleDatePicker 
+
+                <MDBRow>
+ 
+                    <MDBCol>
+                         <MDBInput name="description" label="Please enter the expense description" value={this.state.description} onChange={this.onChange} icon="question" containerClass="text-left"/>
+
+                    </MDBCol>
+
+                </MDBRow>
+
+
+
+                <MDBRow>
+                    
+                    <MDBCol>
+                        <MDBInput value={this.state.amount} name="amount" icon="dollar-sign" containerClass="text-left" onChange={this.onAmountChange} label="Please enter the amount"/>
+
+                    </MDBCol>
+
+                </MDBRow>
+
+
+       
+
+               
+
+                <MDBRow>
+                    <MDBCol><label>Please enter the expense date: </label></MDBCol>
+                    
+
+                </MDBRow>
+
+                <MDBRow>
+                   
+                    <MDBCol>
+                    <SingleDatePicker 
                           date ={this.state.createdAt}
                           onDateChange={this.onDateChange}
                           focused = {this.state.calendarFocused}
                           onFocusChange = {this.onFocusChange}
                           numberOfMonths = {1}
                           isOutsideRange ={()=>false}
-                          /><br/>
-                          <br/>
-                         
-                          
+                    />
+                    </MDBCol>
+                </MDBRow>
+
+                <MDBRow>
+                  
+                    <MDBCol >
+                    <MDBInput type="textarea" icon="pencil-alt" containerClass=
+                    "text-left" name="note" label="please enter your notes" ></MDBInput>
+                    </MDBCol>
+                </MDBRow>
+
+                
+                
+                
+               
+                
 
 
-                          <Button variant="primary" type="submit">
-                              Submit
-                          </Button>
-                          </Container>
-                          
-                          </Form>
-                      
-                      </Container>
-                      
-                      
-                  </Card>       
-                      </Col>
-                  <Col>{' '}</Col>
-              </Row>
-            </Container>
 
-        
-      </div>
+               
+                {/* <button className="btn btn-info indigo btn-block" type="submit">Submit Expense</button> */}
+                <MDBBtn color='indigo' type="submit">Submit Expense</MDBBtn>
+
+             
+                </MDBCardText>
+               
+           
+                </MDBCardBody>
+            </MDBCard>
+        </MDBCol>
+        </form>
+        </MDBContainer>    
+
+        </div>
+     
+      
+       
     )
   }
 }
 
+
 const mapStateToProps = state =>({
-  auth: state.auth,
-  errors: state.error
-})
-export default connect(mapStateToProps)(ExpenseForm);
+    auth: state.auth,
+    errors: state.error
+  })
+  export default connect(mapStateToProps)(ExpenseForm);

@@ -19,6 +19,7 @@
     "express": "^4.16.4",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
+    "mdbreact": "git+https://oauth2:bocxHdp6zeq1rszAxVhh@git.mdbootstrap.com/mdb/react/re-pro.git",
     "moment": "^2.24.0",
     "mongoose": "^5.5.2",
     "passport": "^0.4.0",

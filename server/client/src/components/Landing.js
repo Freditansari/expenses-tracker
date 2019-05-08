@@ -2,6 +2,7 @@ import {Jumbotron, Card, Container, CardColumns, Button} from 'react-bootstrap';
 import React, { Component } from 'react';
 import mern from '../img/mern.jpg'
 import expense from '../img/expense.jpeg';
+import { MDBContainer, MDBRow, MDBCol,MDBCard, MDBCardImage,MDBCardBody, MDBCardTitle,MDBCardText, MDBBtn} from 'mdbreact';
 
 export default class Landing extends Component {
   render() {
@@ -15,8 +16,51 @@ export default class Landing extends Component {
                 <p className="lead">Take back control of your expenses</p>
              </div>
           </Jumbotron>
+        
+        <MDBContainer>
+          <MDBRow>
+          <MDBCol>
+            <MDBCard >
+              <MDBCardImage className="img-fluid" src={mern} waves />
+              <MDBCardBody>
+                <MDBCardTitle>Built with MERN stack</MDBCardTitle>
+                <MDBCardText>
+                MERN stack stands from Mongodb Express React and Node.JS. MERN stacks cuts software development lifecycle significantly
+                </MDBCardText>
+               
+              </MDBCardBody>
+            </MDBCard>
+        </MDBCol>
+        <MDBCol>
+            <MDBCard >
+              <MDBCardImage className="img-fluid" src={expense} wwaves />
+              <MDBCardBody>
+                <MDBCardTitle>Track your expenses per user</MDBCardTitle>
+                <MDBCardText>
+                With Expense tracker you can track and control each user's expense. This means lower administration costs and complete control over your finance
+                </MDBCardText>
+              
+              </MDBCardBody>
+            </MDBCard>
+        </MDBCol>
+        <MDBCol>
+            <MDBCard >
+              <MDBCardImage className="img-fluid" src={expense} waves />
+              <MDBCardBody>
+                <MDBCardTitle>Lorem Ipsum</MDBCardTitle>
+                <MDBCardText>
+                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis eos odio eveniet nemo aperiam incidunt natus fuga eligendi minus possimus. 
+                </MDBCardText>
+                
+              </MDBCardBody>
+            </MDBCard>
+        </MDBCol>
 
-        <Container>
+          </MDBRow>
+
+        </MDBContainer>
+
+        {/* <Container>
          <CardColumns>
           <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src={mern} />
@@ -26,7 +70,7 @@ export default class Landing extends Component {
                 <Card.Text>
                 MERN stack stands from Mongodb Express React and Node.JS. MERN stacks cuts software development lifecycle significantly
                 </Card.Text>
-                {/* <Button variant="primary">Go somewhere</Button> */}
+               
             </Card.Body>
             </Card>
 
@@ -38,7 +82,7 @@ export default class Landing extends Component {
                 <Card.Text> 
                 With Expense tracker you can track and control each user's expense.
                 </Card.Text>
-                {/* <Button variant="primary">Go somewhere</Button> */}
+              
             </Card.Body>
             </Card>
           
@@ -51,13 +95,13 @@ export default class Landing extends Component {
                 <Card.Text> 
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, deserunt quibusdam. Pariatur blanditiis distinctio iste harum aspernatur! 
                 </Card.Text>
-                {/* <Button variant="primary">Go somewhere</Button> */}
+              
             </Card.Body>
             </Card>
           
 
             </CardColumns>
-            </Container>
+            </Container> */}
             
           
          

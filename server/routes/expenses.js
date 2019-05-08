@@ -56,23 +56,17 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
 // @access  Public
 router.post('/getUserExpenses', passport.authenticate('jwt', { session: false }), (req, res)=>{
 
-        User.findById(req.body.id).then(user =>{
-            Expense.find({
-                expenseDate: {
-                    $gte: req.body.from,
-                    $lte: req.body.to
-                }
-            }).then(expense =>{
-                if (!expense){
+
+     Expense.find({$and:[{user:req.user.id},{expenseDate:{$gte: req.body.from,$lte:req.body.to}}]})
+        .then(expenses=>{
+                if(!expenses){
                     res.status(404).json(errors);
                 }
-        
-                res.json(expense);
-            })
+                res.json(expenses)
+            }).catch(errors=> res.status(500).json(errors));
 
-        }).catch(err =>res.status(500).json(err))
-
-});
+    }
+);
 
 
 module.exports = router;

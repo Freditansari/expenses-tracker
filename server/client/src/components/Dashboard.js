@@ -7,12 +7,7 @@ import {Link} from 'react-router-dom'
 
 
 class Dashboard extends Component {
-  componentWillMount(){
-    console.log("banana");
-  }
-  componentWillUnmount(){
-    console.log("potato")
-  }
+
 
   render() {
     return (

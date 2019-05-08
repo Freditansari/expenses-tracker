@@ -18,13 +18,13 @@ import {startAddExpense} from '../redux/actions/expenseActions'
     }
   render() {
     return (
-      <div>
+      <div >
 
-          <Container>
-          <h3>Add Expense</h3>
+       
+          <h3 className="mt-3">Add Expense</h3>
     
           <ExpenseForm onSubmit = {this.onSubmit} />
-          </Container>  
+
       </div>
     )
   }

@@ -1,44 +1,95 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { MDBListGroup, MDBListGroupItem, MDBContainer, MDBCol } from "mdbreact";
+import {getAllExpenses} from '../redux/actions/expenseActions'
+import {connect} from 'react-redux';
 import moment from 'moment';
 import numeral from 'numeral';
-import {Card, ListGroup, Container, Row, Col} from 'react-bootstrap';
+import getFilteredExpenses from './getFilteredExpenses'
 
-const ExpenseListItem = ({id , user, description, amount, expenseDate}) => {
-  return (
-    <div>
-        <Link className="list-item" to={`/edit/${id}`}>
-            <div>
-                {/* use list group */}
-                <Container style={{marginTop:'2.5rem'}}>
-                <ul className="list-group">
-                    <li className="list-group-item">
-                        <Row>
-                            <Col>
-                                <span className="h3">Coffee</span> <br/>
-                                <small className="text-muted">Aug 12, 2019</small>
-                               
-                            </Col>
-                            <Col>
-                                <span className="align-right h3"> $1,000,000.00</span>
-                            </Col>
-                         
-                            
-                        </Row>
-                        
-                    </li>
+ class ExpenseListItem extends Component {
+
+  componentDidMount(){
+    const expenseFilters ={
+      from: this.props.filters.from,
+      to: this.props.filters.to
+    }
+    this.props.getAllExpenses(expenseFilters);
+
+   
+
+  }
+  render() {
+    return (
+      <div className="row d-flex justify-content-center mt-3">
+        <div className="col-md-7">
+        <MDBContainer fluid>
+          
+          <MDBListGroup > 
+           
+            {
+              this.props.expenses.length ===0?
+              (
+                  <div>
+                    <span>No expenses available</span>
+                  </div>
+              ):
+              (
+
+                this.props.expenses.map((expense) =>{
+                  return(
+                    <MDBListGroupItem href="#">
+                    <div className="row">
+                    <div className="col-md-6 justify-content-start">
+                      <span className="h3">{expense.description}</span>
+    
+                      <div className="row d-flex justify-content-center">
+                        <div className="col-md-4">
+                        <small className="text-muted">{moment(expense.expenseDate).format('Do MMMM, YYYY')}</small>
+                        </div>
+                      
+                      </div>
+                     
+                    </div>
+                    <div className="col-md-3 justify-content-end">
+                      <span className="align-right h3"> {numeral(expense.amount/100).format('$0,0.00')}</span>
+                    </div>
                   
+                  
+                    </div>
+                    </MDBListGroupItem>
+                  )
+             
+
+                }
               
-                   
-                </ul>    
-                
-                </Container>
+
+              )
+              )
+            }
+              
                
-            </div>
-        </Link>
+
+            
+         
+          </MDBListGroup>
+          
+        </MDBContainer>
+        
+        </div>
       
-    </div>
-  )
+    
+      </div>
+          
+        
+      
+    )
+  }
 }
 
-export default ExpenseListItem
+const mapStateToProps = (state) =>({
+    filters: state.filters,
+    errors: state.error,
+    expenses: getFilteredExpenses(state.expenses, state.filters)
+
+})
+export default connect(mapStateToProps, {getAllExpenses})(ExpenseListItem);
