@@ -7,10 +7,12 @@ import {connect} from 'react-redux'
 class ExpenseForm extends Component {
     constructor(props) {
         super(props);
+
+ 
     
         this.state = {
           description: props.expense ? props.expense.description : '',
-          note: props.expense ? props.expense.note : '',
+          notes: props.expense ? props.expense.notes : '',
           amount: props.expense ? (props.expense.amount / 100).toString() : '',
           createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
           calendarFocused: false,
@@ -55,7 +57,7 @@ class ExpenseForm extends Component {
             description: this.state.description,
             amount: parseFloat(this.state.amount, 10) * 100,
             createdAt: this.state.createdAt.valueOf(),
-            note: this.state.note
+            notes: this.state.notes
           
           });
         }
@@ -65,7 +67,7 @@ class ExpenseForm extends Component {
         <div>
                <MDBContainer>
 
-       
+             
  
        <form onSubmit={this.onSubmit}>
         <MDBCol>
@@ -126,20 +128,10 @@ class ExpenseForm extends Component {
                   
                     <MDBCol >
                     <MDBInput type="textarea" icon="pencil-alt" containerClass=
-                    "text-left" name="note" label="please enter your notes" ></MDBInput>
+                    "text-left" name="notes" value={this.state.notes} onChange={this.onChange} label="please enter your notes" ></MDBInput>
                     </MDBCol>
                 </MDBRow>
 
-                
-                
-                
-               
-                
-
-
-
-               
-                {/* <button className="btn btn-info indigo btn-block" type="submit">Submit Expense</button> */}
                 <MDBBtn color='indigo' type="submit">Submit Expense</MDBBtn>
 
              

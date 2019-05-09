@@ -18,7 +18,7 @@ const db = require('./config/mongodb').mongoURI;
 app.use(bodyParser.urlencoded({extended:false})); 
 app.use(bodyParser.json());
 
-mongoose.connect(db).then(()=>console.log('Monggo db connecteed')).catch(err=>console.log(err));
+mongoose.connect(db, { useFindAndModify: false, useNewUrlParser:true }).then(()=>console.log('Monggo db connecteed')).catch(err=>console.log(err));
 
 app.get('/', (req, res)=>res.send('hello world'));
 

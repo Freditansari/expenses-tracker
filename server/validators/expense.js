@@ -13,7 +13,8 @@ module.exports = function validateExpenseInput(data){
         errors.description = 'description is required';
 
     }
-    if(isNaN(data.amount)){
+    
+    if(isNaN(data.amount) || isEmpty(data.amount)){
         errors.amount = 'amount is required'; 
         
     }

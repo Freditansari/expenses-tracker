@@ -18,7 +18,7 @@ import getFilteredExpenses from './getFilteredExpenses'
       <MDBCardBody>
               <MDBCardTitle className="white-text font-weight-bold h2">
                     
-                    Viewing {this.props.potato.length} expense(s) with total of: {numeral(expensesTotal(this.props.potato)/100).format('$0,0.00')}
+                    Viewing {this.props.potato.length} {this.props.potato.length >1? "expenses":"expense" } with total of: {numeral(expensesTotal(this.props.potato)/100).format('$0,0.00')}
               </MDBCardTitle>
               
               

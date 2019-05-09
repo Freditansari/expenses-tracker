@@ -37,14 +37,13 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
     const newExpense = new Expense({
         description: req.body.description,
         amount : req.body.amount,
-        note: req.body.note,
+        notes: req.body.note,
         expenseDate: req.body.createdAt, 
-        // user: req.body.user
         user: req.user.id
     });
 
    
-
+    console.log(newExpense);
     newExpense.save().then(expense => res.json(expense)).catch(error => res.status(500).json(errors));
 
 
@@ -55,6 +54,7 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
 // @desc    query expenses by user id and date range
 // @access  Public
 router.post('/getUserExpenses', passport.authenticate('jwt', { session: false }), (req, res)=>{
+    
 
 
      Expense.find({$and:[{user:req.user.id},{expenseDate:{$gte: req.body.from,$lte:req.body.to}}]})
@@ -68,5 +68,19 @@ router.post('/getUserExpenses', passport.authenticate('jwt', { session: false })
     }
 );
 
+
+// @route   POST api/expenses/edit
+// @desc    edit expenses by id
+// @access  Public
+router.post('/edit', passport.authenticate('jwt', { session: false }), (req, res)=>{
+    const {errors, isValid} = validateExpenseInput(req.body);
+    if(!isValid){
+        return res.status(400).json(errors);
+    }
+ 
+    Expense.findByIdAndUpdate(req.body.id, req.body, {new: true}).then(expense =>{
+        res.status(200).json(expense);
+    }).catch(errors=> res.status(500).json(errors))
+});
 
 module.exports = router;

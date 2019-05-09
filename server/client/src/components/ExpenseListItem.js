@@ -4,7 +4,8 @@ import {getAllExpenses} from '../redux/actions/expenseActions'
 import {connect} from 'react-redux';
 import moment from 'moment';
 import numeral from 'numeral';
-import getFilteredExpenses from './getFilteredExpenses'
+import getFilteredExpenses from './getFilteredExpenses';
+import {Link} from 'react-router-dom'
 
  class ExpenseListItem extends Component {
   componentDidMount(){
@@ -17,6 +18,8 @@ import getFilteredExpenses from './getFilteredExpenses'
    
 
   }
+
+
 
  
   render() {
@@ -41,25 +44,33 @@ import getFilteredExpenses from './getFilteredExpenses'
 
                 this.props.expenses.map((expense) =>{
                   return(
-                    <MDBListGroupItem href="#">
-                    <div className="row">
-                    <div className="col-md-6 justify-content-start">
-                      <span className="h3">{expense.description}</span>
-    
-                      <div className="row d-flex justify-content-center">
-                        <div className="col-md-4">
-                        <small className="text-muted">{moment(expense.expenseDate).format('Do MMMM, YYYY')}</small>
-                        </div>
+                    
+                    // <MDBListGroupItem href={`/edit/expenses/${expense.id}`}>
+                    // <MDBListGroupItem href={`/edit/expenses/${expense._id}`}>
+                    <MDBListGroupItem >
+                    {/* <a onClick={(e) => e.preventDefault()} href={`/edit/expenses/${expense._id}`}> */}
+                    <Link to={`/edit/expenses/${expense._id}`}>
+                        <div className="row">
+                        <div className="col-md-6 justify-content-start">
                       
-                      </div>
-                     
-                    </div>
-                    <div className="col-md-3 justify-content-end">
-                      <span className="align-right h3"> {numeral(expense.amount/100).format('$0,0.00')}</span>
-                    </div>
-                  
-                  
-                    </div>
+                          <span className="h3">{expense.description}</span>
+                          <div className="row d-flex justify-content-center">
+                            <div className="col-md-4">
+                            <small className="text-muted">{moment(expense.expenseDate).format('Do MMMM, YYYY')}</small>
+                            </div>
+                          
+                          </div>
+                        
+                          </div>
+                          <div className="col-md-3 justify-content-end">
+                            <span className="align-right h3"> {numeral(expense.amount/100).format('$0,0.00')}</span>
+                          </div>
+
+                    
+                      
+                      
+                        </div>
+                    </Link>
                     </MDBListGroupItem>
                   )
              

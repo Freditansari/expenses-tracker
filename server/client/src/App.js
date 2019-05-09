@@ -18,6 +18,7 @@ import store from './store';
 import { setCurrentUser, logoutUser } from './redux/actions/authActions';
 import AddExpense from './components/AddExpense';
 import placeholder from './components/placeholder';
+import EditExpense from './components/EditExpense';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
@@ -71,6 +72,7 @@ class App extends Component {
                 {/* <Route exact path="/expense" component={ExpenseListItem} /> */}
                 <Route exact path="/addexpense" component={AddExpense} />
                 <Route exact path="/placeholder" component={placeholder} />
+                <Route exact path="/edit/expenses/:id" component={EditExpense} />
             </div>
             </Router>
 

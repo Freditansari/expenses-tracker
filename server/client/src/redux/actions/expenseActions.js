@@ -1,6 +1,7 @@
 import Axios from "axios";
 
 export const startAddExpense =(expenseData, history)=> dispatch =>{
+    console.log(expenseData);
     Axios.post("/api/expenses/add", expenseData)
         .then(res =>{
             
