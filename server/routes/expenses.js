@@ -83,4 +83,21 @@ router.post('/edit', passport.authenticate('jwt', { session: false }), (req, res
     }).catch(errors=> res.status(500).json(errors))
 });
 
+// @route   POST api/expenses/delete/:id
+// @desc    delete expense by id
+// @access  Public
+router.delete('/delete/:expense_id', passport.authenticate('jwt', {session: false}), (req,res) =>{
+    
+        Expense.findByIdAndRemove({_id: req.params.expense_id})
+        .then((expense)=>{
+            if(expense==null){
+                res.status(404).json({success:false})
+            }
+            res.status(200).json(expense)
+        }
+        ).catch(error => res.status(500).json({success: false}));
+
+})
+
+
 module.exports = router;

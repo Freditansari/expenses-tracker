@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {getAllExpenses} from '../redux/actions/expenseActions';
 import ExpenseForm from './ExpenseForm';
+import {MDBBtn, MDBIcon} from'mdbreact'
 
 class EditExpense extends Component {
-
+//todo do update dispatch and delete dispatch
 
 
 
@@ -18,6 +19,9 @@ class EditExpense extends Component {
   
          
         <ExpenseForm expense={this.props.expense} />
+        <MDBBtn color="red">
+        <MDBIcon icon="far fa-trash-alt" className="mr-1" /> Delete
+        </MDBBtn>
        
       </div>
     )

@@ -39,7 +39,28 @@ export const getAllExpenses = (expensesFilter, history)=>dispatch =>{
                 payload: res.data
             }
         )
-    })
+    });
+
 
 }
+
+export const removeExpense =id=>dispatch =>{
+
+    Axios.delete(`/api/expenses/delete/${id}`)
+    .then(res=> 
+        dispatch({
+            type:"REMOVE_EXPENSE", 
+            payload: res.data
+        })
+            )
+        .catch(err => 
+            dispatch(
+                {
+                    type: "GET_ERRORS", 
+                    payload: err.response.data
+                }
+            ))
+}
+
+
 
