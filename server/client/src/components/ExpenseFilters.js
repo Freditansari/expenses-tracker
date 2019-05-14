@@ -3,7 +3,8 @@ import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'rea
 import {MDBContainer, MDBRow, MDBCol, MDBIcon, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem} from 'mdbreact';
 import {connect} from 'react-redux';
 
-import {setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate} from '../redux/actions/filtersActions'
+import {setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate} from '../redux/actions/filtersActions';
+import {getAllExpenses} from '../redux/actions/expenseActions'
 import moment from 'moment';
 import 'react-dates/lib/css/_datepicker.css';
 
@@ -19,7 +20,12 @@ import 'react-dates/lib/css/_datepicker.css';
       handleDateChange = ({ startDate, endDate }) =>{
 
         this.props.setStartDate(startDate);
-        this.props.setEndDate(endDate.endOf('day'))
+        this.props.setEndDate(endDate.endOf('day'));
+        const expenseFilters ={
+          from: this.props.filters.from,
+          to: this.props.filters.to
+        }
+        this.props.getAllExpenses(expenseFilters);
 
 
       }
@@ -93,7 +99,7 @@ import 'react-dates/lib/css/_datepicker.css';
                       onFocusChange={this.handleFocusChange}
                       startDate={this.props.filters.from}
                       startDateId="startDate"
-                      showClearDates={true}
+                      showClearDates={false}
                       numberOfMonths={1}
                       size="sm"/>  
                     </MDBCol>
@@ -113,4 +119,4 @@ const mapStateToProps =state=>({
     auth: state.auth
 })
 
-export default connect(mapStateToProps,  {setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate})( ExpenseFilters);
+export default connect(mapStateToProps,  {setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate, getAllExpenses})( ExpenseFilters);

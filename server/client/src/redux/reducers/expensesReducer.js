@@ -7,23 +7,21 @@ export default(state = expensesReducerDefaultState, action)=>{
                  action.expense
                 ];
         case 'SET_EXPENSES': 
-            return action.payload;
-
-        
+            return action.payload;        
                 
         case 'REMOVE_EXPENSE':
             return state.filter(({id})=> id !== action.id);
         
         case 'EDIT_EXPENSE':
             return state.map((expense)=>{
-                if (expense.id ==action.id){
+                if (expense.id ===action.id){
                     return{
                         ...expense,
                         ...action.updates
                     };
                 }else{
                     return expense;
-                }
+                };
             });
     
         default: 

@@ -8,12 +8,25 @@ import getFilteredExpenses from './getFilteredExpenses';
 import {Link} from 'react-router-dom'
 
  class ExpenseListItem extends Component {
+
+  constructor(props){
+    super(props);
+
+
+  }
+
+  componentWillMount(){
+ 
+  }
   componentDidMount(){
     const expenseFilters ={
       from: this.props.filters.from,
       to: this.props.filters.to
     }
+    //todo need to debug... this makes the date selector does not become responsive
+   
     this.props.getAllExpenses(expenseFilters);
+
 
    
 
@@ -27,18 +40,22 @@ import {Link} from 'react-router-dom'
       <div className="row d-flex justify-content-center mt-3">
         <div className="col-md-7">
         <MDBContainer fluid>
+        
           
           <MDBListGroup > 
            
+           
             {
+              
               this.props.expenses.length ===0?
+              
               (
+                
                   <div>
                     <span>No expenses available</span>
-                    <div class="spinner-border text-primary" role="status">
-                      <p><span class="sr-only">Loading...</span></p>
-                    </div>
+               
                   </div>
+                  
               ):
               (
 
@@ -48,7 +65,7 @@ import {Link} from 'react-router-dom'
                     // <MDBListGroupItem href={`/edit/expenses/${expense.id}`}>
                     // <MDBListGroupItem href={`/edit/expenses/${expense._id}`}>
                     <MDBListGroupItem >
-                    {/* <a onClick={(e) => e.preventDefault()} href={`/edit/expenses/${expense._id}`}> */}
+                  
                     <Link to={`/edit/expenses/${expense._id}`}>
                         <div className="row">
                         <div className="col-md-6 justify-content-start">
@@ -72,7 +89,9 @@ import {Link} from 'react-router-dom'
                         </div>
                     </Link>
                     </MDBListGroupItem>
+                   
                   )
+                  
              
 
                 }

@@ -3,26 +3,32 @@ import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MD
 import moment from 'moment';
 import {SingleDatePicker} from 'react-dates';
 import {connect} from 'react-redux'
+import { isUndefined } from 'util';
 
 class ExpenseForm extends Component {
     constructor(props) {
         super(props);
 
  
-    
-        this.state = {
-          description: props.expense ? props.expense.description : '',
-          notes: props.expense ? props.expense.notes : '',
-          amount: props.expense ? (props.expense.amount / 100).toString() : '',
-          createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
-          calendarFocused: false,
-          user: "",
-          error: ''
-        };
+        
+            this.state = {
+            
+              description: props.expense ? props.expense.description : '',
+              notes: props.expense ? props.expense.notes : '',
+              amount: props.expense ? (props.expense.amount / 100).toString() : '',
+              expenseDate: props.expense ? moment(props.expense.expenseDate) : moment(),
+              calendarFocused: false,
+              user: "",
+              error: ''
+            };
+        
+          
+        
+        
       }
-      onDateChange = (createdAt) => {
-        if (createdAt) {
-          this.setState(() => ({ createdAt }));
+      onDateChange = (expenseDate) => {
+        if (expenseDate) {
+          this.setState(() => ({ expenseDate }));
         }
       };
 
@@ -56,14 +62,16 @@ class ExpenseForm extends Component {
           this.props.onSubmit({
             description: this.state.description,
             amount: parseFloat(this.state.amount, 10) * 100,
-            createdAt: this.state.createdAt.valueOf(),
+            expenseDate: this.state.expenseDate.valueOf(),
             notes: this.state.notes
           
           });
         }
       };
   render() {
+ 
     return (
+    
         <div>
                <MDBContainer>
 
@@ -114,7 +122,7 @@ class ExpenseForm extends Component {
                    
                     <MDBCol>
                     <SingleDatePicker 
-                          date ={this.state.createdAt}
+                          date ={this.state.expenseDate}
                           onDateChange={this.onDateChange}
                           focused = {this.state.calendarFocused}
                           onFocusChange = {this.onFocusChange}

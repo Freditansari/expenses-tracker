@@ -13,15 +13,15 @@ class ExpenseForm extends Component {
           description: props.expense ? props.expense.description : '',
           note: props.expense ? props.expense.note : '',
           amount: props.expense ? (props.expense.amount / 100).toString() : '',
-          createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+          expenseDate: props.expense ? moment(props.expense.expenseDate) : moment(),
           calendarFocused: false,
           user: "",
           error: ''
         };
       }
-      onDateChange = (createdAt) => {
-        if (createdAt) {
-          this.setState(() => ({ createdAt }));
+      onDateChange = (expenseDate) => {
+        if (expenseDate) {
+          this.setState(() => ({ expenseDate }));
         }
       };
 
@@ -55,7 +55,7 @@ class ExpenseForm extends Component {
           this.props.onSubmit({
             description: this.state.description,
             amount: parseFloat(this.state.amount, 10) * 100,
-            createdAt: this.state.createdAt.valueOf(),
+            expenseDate: this.state.expenseDate.valueOf(),
             note: this.state.note
             // user: this.props.auth.user.id.toString()
           });
@@ -90,7 +90,7 @@ class ExpenseForm extends Component {
                           </Form.Group>
             
                           <SingleDatePicker 
-                          date ={this.state.createdAt}
+                          date ={this.state.expenseDate}
                           onDateChange={this.onDateChange}
                           focused = {this.state.calendarFocused}
                           onFocusChange = {this.onFocusChange}

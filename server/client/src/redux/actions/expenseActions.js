@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export const startAddExpense =(expenseData, history)=> dispatch =>{
-    console.log(expenseData);
+
     Axios.post("/api/expenses/add", expenseData)
         .then(res =>{
             
@@ -33,25 +33,33 @@ export const getAllExpenses = (expensesFilter, history)=>dispatch =>{
     //the node js will filter the user from the login token which being sent from the header
     Axios.post('/api/expenses/getUserExpenses', expensesFilter)
     .then(res =>{
+       
         dispatch(
             {
                 type: 'SET_EXPENSES',
                 payload: res.data
             }
         )
-    });
+    }).catch(errors => console.log(errors));
 
 
 }
 
-export const removeExpense =id=>dispatch =>{
+export const removeExpense =(id, history)=>dispatch =>{
 
     Axios.delete(`/api/expenses/delete/${id}`)
-    .then(res=> 
+    .then(res=> {
         dispatch({
             type:"REMOVE_EXPENSE", 
             payload: res.data
         })
+
+        history.push('/dashboard');
+
+        
+    }
+        
+        
             )
         .catch(err => 
             dispatch(
@@ -59,7 +67,24 @@ export const removeExpense =id=>dispatch =>{
                     type: "GET_ERRORS", 
                     payload: err.response.data
                 }
-            ))
+            )
+
+            )
+}
+
+export const editExpense = (expense, history) => dispatch =>{
+  
+
+    Axios.post(`/api/expenses/edit`,expense).then(res=>
+        { 
+            dispatch({
+                type:"EDIT_EXPENSE",
+                updates: res.data
+                })
+
+               
+            }
+        ).catch(err => console.log(err))
 }
 
 
