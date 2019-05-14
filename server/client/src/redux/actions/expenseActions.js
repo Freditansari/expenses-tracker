@@ -49,19 +49,19 @@ export const removeExpense =(id, history)=>dispatch =>{
 
     Axios.delete(`/api/expenses/delete/${id}`)
     .then(res=> {
+        
         dispatch({
             type:"REMOVE_EXPENSE", 
             payload: res.data
         })
 
-        history.push('/dashboard');
+       
 
         
     }
-        
-        
             )
-        .catch(err => 
+        .catch(err => {
+            console.log(err)
             dispatch(
                 {
                     type: "GET_ERRORS", 
@@ -69,7 +69,7 @@ export const removeExpense =(id, history)=>dispatch =>{
                 }
             )
 
-            )
+            })
 }
 
 export const editExpense = (expense, history) => dispatch =>{
