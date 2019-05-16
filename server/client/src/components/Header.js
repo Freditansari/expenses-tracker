@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { MDBNavbar, MDBNavbarBrand, NavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem }
+import { MDBNavbar, MDBNavbarBrand, NavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer,  }
 from 'mdbreact';
+
 
 class Header extends Component {
 state = {
   collapseID: ''
 }
+
 
 toggleCollapse = collapseID => () => {
   this.setState(prevState => ({ collapseID: (prevState.collapseID !== collapseID ? collapseID : '') }));
@@ -29,20 +31,12 @@ render() {
               <MDBNavLink to="/dashboard">Expense</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="/placeholder">placeholder</MDBNavLink>
+              <MDBNavLink to="/register">Register</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBDropdown>
-                <MDBDropdownToggle nav caret>
-                  <span className="mr-2">Dropdown</span>
-                </MDBDropdownToggle>
-                <MDBDropdownMenu>
-                  <MDBDropdownItem href="#!">Action</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-                </MDBDropdownMenu>
-              </MDBDropdown>
+              <MDBNavLink to="/logout" >Logout</MDBNavLink>
+              
+           
             </MDBNavItem>
             </NavbarNav>
           </MDBCollapse>
@@ -53,5 +47,6 @@ render() {
     );
   }
 }
+
 
 export default Header;

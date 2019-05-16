@@ -47,9 +47,9 @@ export default class Landing extends Component {
             <MDBCard >
               <MDBCardImage className="img-fluid" src={expense} waves />
               <MDBCardBody>
-                <MDBCardTitle>Lorem Ipsum</MDBCardTitle>
+                <MDBCardTitle>Multi-Tenant Application</MDBCardTitle>
                 <MDBCardText>
-                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis eos odio eveniet nemo aperiam incidunt natus fuga eligendi minus possimus. 
+                   this project is a proof of concept for a multi-tenant application where we can host thousands of user without leaking access to each other user. 
                 </MDBCardText>
                 
               </MDBCardBody>

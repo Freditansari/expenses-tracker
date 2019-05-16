@@ -19,10 +19,12 @@ import { setCurrentUser, logoutUser } from './redux/actions/authActions';
 import AddExpense from './components/AddExpense';
 import placeholder from './components/placeholder';
 import EditExpense from './components/EditExpense';
+import PrivateRoute from './commons/PrivateRoute'
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
+import Logout from './components/Logout';
 
 
 
@@ -67,12 +69,20 @@ class App extends Component {
             
                 <Route exact path="/" component={Landing} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/register" component={Register} />
-                {/* <Route exact path="/expense" component={ExpenseListItem} /> */}
-                <Route exact path="/addexpense" component={AddExpense} />
                 <Route exact path="/placeholder" component={placeholder} />
-                <Route exact path="/edit/expenses/:id" component={EditExpense} />
+                <Route exact path="/logout" component={Logout} />
+                
+                <Switch>
+                  <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                </Switch>
+                <Switch>
+                 <PrivateRoute exact path="/addexpense" component={AddExpense}  />
+                </Switch>
+                <Switch>
+                 <PrivateRoute exact path="/edit/expenses/:id" component={EditExpense} />
+                </Switch>
+               
             </div>
             </Router>
 
