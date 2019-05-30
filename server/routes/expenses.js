@@ -7,7 +7,7 @@ const keys = require('../config/mongodb');
 const passport = require('passport');
 
 const Expense = require('../models/Expense');
-const User = require('../models/User');
+
 
 const validateExpenseInput = require('../validators/expense');
 
@@ -43,7 +43,7 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
     });
 
    
-    newExpense.save().then(expense => res.json(expense)).catch(error => res.status(500).json(errors));
+    newExpense.save().then(expense => res.json(expense)).catch(error => res.status(500).json(error));
 
 
 }); 
