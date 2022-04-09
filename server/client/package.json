@@ -9,7 +9,7 @@
     "jquery": "^3.4.0",
     "jwt-decode": "^2.2.0",
     "mdbreact": "^4.13.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "numeral": "^2.0.6",
     "popper.js": "^1.15.0",
     "react": "^16.8.6",
